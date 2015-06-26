@@ -5,6 +5,22 @@ require 'byebug'
 @score1 = 0
 @score2 = 0
 
+def main
+  loop do
+    if (@life1 == 0) || (@life2 == 0)
+    if @life1 >= @life2
+      puts "Player1 wins!"
+      return
+    else
+      puts "Player2 wins!"
+      return
+    end
+  end
+   generate_question
+   verify_answer
+  end
+end
+
 def generate_question
   @num1 = rand(1..20)
   @num2 = rand(1..20)
@@ -15,31 +31,23 @@ def generate_question
 end
 
 def verify_answer
-  until (@life1 == 0) || (@life2 == 0)
-    generate_question 
-    if @ans1 == @num1 + @num2
-      @score1 += 1
-    else
-      @life1 -= 1
-    end
-    if @ans2 == @num1 + @num2
-      @score2 += 1
-    else
-      @life2 -= 1
-    end
-    puts "Player1 has #{@life1} lives left!"
-    puts "Player1's score is #{@score1}!"
-    puts "Player2 has #{@life2} lives left!"
-    puts "Player2's score is #{@score2}!"
-  end
-  if @life1 > @life2
-    puts "Player1 wins!"
+  if @ans1 == @num1 + @num2
+    @score1 += 1
   else
-    puts "Player2 wins!"
+    @life1 -= 1
   end
+  if @ans2 == @num1 + @num2
+    @score2 += 1
+  else
+    @life2 -= 1
+  end
+  puts "Player1 has #{@life1} lives left!"
+  puts "Player1's score is #{@score1}!"
+  puts "Player2 has #{@life2} lives left!"
+  puts "Player2's score is #{@score2}!"
 end
 
-verify_answer
+main
 
 
 
